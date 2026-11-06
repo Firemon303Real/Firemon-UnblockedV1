@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<title>Game</title>
+	<style>
+		html,
+		body,
+		#canvas {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			width: 100%;
+			height: 100%
+		}
+
+		body {
+			background: #000;
+			color: #fff;
+			overflow: hidden;
+			touch-action: none
+		}
+
+		#canvas {
+			display: block
+		}
+
+		#status {
+			position: absolute;
+			inset: 0;
+			background: #000;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			visibility: hidden
+		}
+
+		#status-notice {
+			display: none;
+			background: #5b3943;
+			padding: 1rem;
+			margin: 2rem;
+			text-align: center;
+			white-space: pre-wrap
+		}
+	</style>
+</head>
+
+<body><canvas id="canvas"></canvas>
+	<div id="status"><progress id="status-progress"></progress>
+		<div id="status-notice"></div>
+	</div>
+	<script>(async () => { const base = 'https://cdn.jsdelivr.net/gh/linkawaken1979-alt/a-game-about-balls-and-weapons-web-port/'; const name = 'a-game-about-balls-with-weapons-web-port'; const status = document.getElementById('status'), notice = document.getElementById('status-notice'); function error(e) { console.error(e); status.style.visibility = 'visible'; notice.style.display = 'block'; notice.textContent = 'Game loading error: ' + (e.message || e) } try { const parts = await Promise.all([0, 1].map(async i => { const u = base + name + '.wasm.part' + String(i).padStart(3, '0'); const r = await fetch(u); if (!r.ok) throw Error('Failed to load ' + u + ' (HTTP ' + r.status + '). Check that the part exists in GitHub.'); return r.arrayBuffer() })); const wasmURL = URL.createObjectURL(new Blob(parts, { type: 'application/wasm' })); const originalFetch = window.fetch.bind(window); window.fetch = (input, init) => { const u = typeof input === 'string' ? input : input instanceof Request ? input.url : String(input); if (u.endsWith(name + '.wasm') || u.endsWith(encodeURIComponent(name + '.wasm'))) return originalFetch(wasmURL, init); if (u.endsWith(name + '.pck') || u.endsWith(encodeURIComponent(name + '.pck'))) return originalFetch(base + name + '.pck', init); return originalFetch(input, init) }; const script = document.createElement('script'); script.src = base + name + '.js'; script.onload = () => { try { const config = { args: [], canvasResizePolicy: 2, emscriptenPoolSize: 8, ensureCrossOriginIsolationHeaders: true, executable: name, experimentalVK: false, fileSizes: { [name + '.pck']: 3551068, [name + '.wasm']: 39513091 }, focusCanvas: true, gdextensionLibs: [], godotPoolSize: 4 }; const engine = new Engine(config); status.style.visibility = 'visible'; engine.startGame({ onProgress: (current, total) => { const p = document.getElementById('status-progress'); if (total > 0) { p.max = total; p.value = current } } }).then(() => status.remove(), error) } catch (e) { error(e) } }; script.onerror = () => error(Error('Could not load the Godot JavaScript loader from jsDelivr.')); document.body.appendChild(script) } catch (e) { error(e) } })();</script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+[
+  {
+    "id": "retrobowl",
+    "title": "Retro Bowl",
+    "description": "Lead your team to the championship.",
+    "htmlFile": "Retro Bowl.html",
+    "imageUrl": "/game-logos/retro-bowl-title.png"
+  },
+  {
+    "id": "retrobowl-college",
+    "title": "Retro Bowl College",
+    "description": "Build a college football dynasty.",
+    "htmlFile": "Retro Bowl College.html",
+    "imageUrl": "/game-logos/retro-bowl-college.png"
+  },
+  {
+    "id": "cookie-clicker",
+    "title": "Cookie Clicker",
+    "description": "click cookies ig",
+    "htmlFile": "cookie-clicker.html",
+    "imageUrl": "/game-logos/cookie-clicker.png"
+  },
+  {
+    "id": "cannon-balls-3d",
+    "title": "Cannon Balls 3d",
+    "description": "cannon balls maybe idk",
+    "htmlFile": "cannon-balls-3d.html",
+    "imageUrl": "/game-logos/cannon-balls-3d.jpg"
+  },
+  {
+    "id": "capybara-clicker",
+    "title": "Capybara Clicker",
+    "description": "click a capybara a lot",
+    "htmlFile": "capybara-clicker.html",
+    "imageUrl": "/game-logos/capybara-clicker.png"
+  },
+  {
+    "id": "zombie-road",
+    "title": "Zombie Road",
+    "description": "zombies on a row idk?",
+    "htmlFile": "zombie-road.html",
+    "imageUrl": "/game-logos/zombie-road.jpg"
+  },
+  {
+    "id": "game-about-balls-and-weapons",
+    "title": "Game about balls and weapons",
+    "description": "balls and weapons maybe idk?",
+    "htmlFile": "game-about-balls-and-weapons.html",
+    "imageUrl": "/game-logos/game-about-balls-and-weapons.png"
+  }
+]
